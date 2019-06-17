@@ -186,6 +186,8 @@ GameObject:
   - component: {fileID: 7256087443895815157}
   - component: {fileID: 1317798339143567647}
   - component: {fileID: 150073755755955849}
+  - component: {fileID: 676489026430251043}
+  - component: {fileID: 5499620183621080883}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -237,3 +239,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd73431e40030c4f81c63d0032fdd54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &676489026430251043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7256087443895815162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e413dd4ee614d4592fdddfa90218ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5499620183621080883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7256087443895815162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85e28620f2553a4c8f2c58b06664f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boatSpeed: 6
+  boatStrafeSpeed: 3
