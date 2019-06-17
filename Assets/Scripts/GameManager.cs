@@ -35,4 +35,9 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Player died!");
     }
+
+    public void OnWin()
+    {
+        Debug.Log("Player won!");
+    }
 }

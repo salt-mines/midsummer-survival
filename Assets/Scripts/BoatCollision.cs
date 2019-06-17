@@ -20,6 +20,12 @@ public class BoatCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.gameObject.tag == "Finish")
+        {
+            gameManager.OnWin();
+            return;
+        }
+
         gameManager.PlayerTakeDamage();
     }
 }
