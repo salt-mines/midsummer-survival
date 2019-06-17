@@ -10,7 +10,7 @@ public class LifePanel : MonoBehaviour
     private RectTransform rectTransform;
     private RectTransform lifeTransform;
 
-    void Start()
+    void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         lifeTransform = lifePrefab.GetComponent<RectTransform>();
