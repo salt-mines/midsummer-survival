@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     // Level system
     public string[] levelList;
+    public bool gameCanEnd = true;
 
     private int currentLevel = 0;
 
@@ -148,6 +149,8 @@ public class GameManager : MonoBehaviour
 
     void OnDeath()
     {
+        if (!gameCanEnd) return;
+
         Pause();
         Debug.Log("Player died!");
 
@@ -160,6 +163,11 @@ public class GameManager : MonoBehaviour
     {
         Pause();
         Debug.Log("Player won!");
+
+        if (!gameCanEnd)
+        {
+            Restart();
+        }
 
         GameOverMenu gameOver = Instantiate(gameOverMenuPrefab, canvas.transform);
 

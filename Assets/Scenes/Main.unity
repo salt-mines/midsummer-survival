@@ -1152,6 +1152,7 @@ MonoBehaviour:
   levelList:
   - Level 1
   - Level 2
+  gameCanEnd: 1
   playerHitImmunityTime: 1
   playerMaxLives: 3
   lifePanel: {fileID: 8430411882701847576}
