@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public Canvas canvas;
 
     public MenuScript pauseMenuPrefab;
-    public GameObject nextLevelMenuPrefab;
+    public MenuScript nextLevelMenuPrefab;
     public GameOverMenu gameOverMenuPrefab;
 
     private bool paused;
@@ -145,6 +145,13 @@ public class GameManager : MonoBehaviour
 
         paused = true;
 
+    }
+
+    public void OnNextLevelMenu()
+    {
+        Pause();
+
+        Instantiate(nextLevelMenuPrefab, canvas.transform);
     }
 
     void OnDeath()
