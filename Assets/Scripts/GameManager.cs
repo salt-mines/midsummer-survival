@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
 
         lifePanel.SetCurrentLives(playerCurrentLives);
 
-        if(playerCurrentLives < 0)
+        if(playerCurrentLives == 0)
         {
             OnDeath();
         }
