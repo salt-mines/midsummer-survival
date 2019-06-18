@@ -188,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boatSpeed: 6
   boatStrafeSpeed: 3
+  boatTurnSpeed: 0.2
   drunkEffectStrength: 1
   drunkLevel: 0
 --- !u!1001 &1132026866293040075

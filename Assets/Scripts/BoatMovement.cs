@@ -5,6 +5,7 @@ public class BoatMovement : MonoBehaviour
 {
     public float boatSpeed = 6f;
     public float boatStrafeSpeed = 3f;
+    public float boatTurnSpeed = 0.2f;
 
     public float drunkEffectStrength = 1f;
 
@@ -37,6 +38,8 @@ public class BoatMovement : MonoBehaviour
 
     private float drunkMovement;
 
+    private Vector3 rotation;
+
     void FixedUpdate()
     {
         if (isPaused) return;
@@ -48,11 +51,17 @@ public class BoatMovement : MonoBehaviour
 
         var target = input.Horizontal + drunkMovement * drunkLevel;
 
-        currentMovement = Mathf.SmoothDamp(currentMovement, target, ref currentDampingVelocity, drunkLevel);
+        currentMovement = Mathf.SmoothDamp(currentMovement, target, ref currentDampingVelocity, boatTurnSpeed + drunkLevel);
         newPos.x += currentMovement * boatStrafeSpeed * Time.deltaTime;
 
         newPos.x = Mathf.Clamp(newPos.x, leftBound, rightBound);
 
+        rotation.y = 90 + currentMovement * 45;
+        rotation.z = -boatSpeed;
+
         transform.position = newPos;
+
+        var model = transform.GetChild(0);
+        model.transform.rotation = Quaternion.Euler(rotation);
     }
 }

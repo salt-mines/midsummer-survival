@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class GameManager : MonoBehaviour
     public MenuScript nextLevelMenuPrefab;
     public GameOverMenu gameOverMenuPrefab;
 
+    public TextMeshProUGUI drunkText;
+
     private bool paused;
 
     // Start is called before the first frame update
@@ -49,6 +52,8 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(levelList[currentLevel], LoadSceneMode.Additive);
+
+        Reset();
     }
 
     // Update is called once per frame
@@ -71,8 +76,15 @@ public class GameManager : MonoBehaviour
     {
         player.transform.position = playerPos;
         playerTimeWaited = 0;
-        player.GetComponent<BoatMovement>().isPaused = true;
         playerWaiting = true;
+        player.GetComponent<BoatMovement>().isPaused = true;
+        var drunk = currentLevel * 1 / (levelList.Length - 1);
+        player.GetComponent<BoatMovement>().drunkLevel = drunk;
+
+        if (drunkText)
+        {
+            drunkText.text = $"{drunk:P0}";
+        }
 
         Resume();
     }
@@ -122,7 +134,7 @@ public class GameManager : MonoBehaviour
 
         lifePanel.SetCurrentLives(playerCurrentLives);
 
-        if(playerCurrentLives == 0)
+        if (playerCurrentLives == 0)
         {
             OnDeath();
         }
@@ -130,7 +142,7 @@ public class GameManager : MonoBehaviour
 
     public void OnPauseMenu()
     {
-        if(paused) { return; }
+        if (paused) { return; }
 
         Pause();
 
