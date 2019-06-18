@@ -34,11 +34,6 @@ public class BoatMovement : MonoBehaviour
         var newPos = transform.position;
         newPos.z += boatSpeed * Time.deltaTime;
 
-        if (input.Pause)
-        {
-            newPos.z = startingPos;
-        }
-
         newPos.x += input.Horizontal * boatStrafeSpeed * Time.deltaTime;
         newPos.x = Mathf.Clamp(newPos.x, leftBound, rightBound);
 

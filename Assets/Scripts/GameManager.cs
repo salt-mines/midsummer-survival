@@ -27,9 +27,11 @@ public class GameManager : MonoBehaviour
     // UI
     public Canvas canvas;
 
-    public GameObject pauseMenuPrefab;
+    public MenuScript pauseMenuPrefab;
     public GameObject nextLevelMenuPrefab;
     public GameOverMenu gameOverMenuPrefab;
+
+    private bool paused;
 
     // Start is called before the first frame update
     void Start()
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour
     public void Resume()
     {
         Time.timeScale = 1;
+        paused = false;
     }
 
     public void Pause()
@@ -128,6 +131,18 @@ public class GameManager : MonoBehaviour
         {
             OnDeath();
         }
+    }
+
+    public void OnPauseMenu()
+    {
+        if(paused) { return; }
+
+        Pause();
+
+        Instantiate(pauseMenuPrefab, canvas.transform);
+
+        paused = true;
+
     }
 
     void OnDeath()
