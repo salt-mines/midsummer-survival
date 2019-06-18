@@ -97,13 +97,6 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        if (currentLevel == levelList.Length - 1)
-        {
-            // Last level, win!
-            OnWin();
-            return;
-        }
-
         Pause();
         StartCoroutine(LoadLevelAsync((currentLevel + 1) % levelList.Length));
     }
@@ -149,6 +142,13 @@ public class GameManager : MonoBehaviour
 
     public void OnNextLevelMenu()
     {
+        if (currentLevel == levelList.Length - 1)
+        {
+            // Last level, win!
+            OnWin();
+            return;
+        }
+
         Pause();
 
         Instantiate(nextLevelMenuPrefab, canvas.transform);
