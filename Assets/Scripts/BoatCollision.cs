@@ -22,7 +22,7 @@ public class BoatCollision : MonoBehaviour
     {
         if(other.gameObject.tag == "Finish")
         {
-            gameManager.OnWin();
+            gameManager.NextLevel();
             return;
         }
 

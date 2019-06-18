@@ -1,8 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // Player stuff
+    public GameObject player;
+    private Vector3 playerPos;
+
+    public float playerSpawnWaitTime = 3;
+    private float playerTimeWaited;
+    private bool playerWaiting;
+
     // Level system
     public string[] levelList;
 
@@ -11,11 +20,11 @@ public class GameManager : MonoBehaviour
     // Life system
     public float playerHitImmunityTime = 1f;
     public int playerMaxLives = 3;
-
     public LifePanel lifePanel;
 
     private int playerCurrentLives;
 
+    // UI
     public Canvas canvas;
 
     public GameObject pauseMenuPrefab;
@@ -25,6 +34,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerPos = player.transform.position;
         playerCurrentLives = playerMaxLives;
 
         lifePanel.SetMaxLives(playerMaxLives);
@@ -41,7 +51,27 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (playerWaiting)
+        {
+            if (playerTimeWaited < playerSpawnWaitTime)
+            {
+                playerTimeWaited += Time.deltaTime;
+            }
+            else
+            {
+                player.GetComponent<BoatMovement>().isPaused = false;
+            }
+        }
+    }
+
+    private void Reset()
+    {
+        player.transform.position = playerPos;
+        playerTimeWaited = 0;
+        player.GetComponent<BoatMovement>().isPaused = true;
+        playerWaiting = true;
+
+        Resume();
     }
 
     public void Resume()
@@ -56,12 +86,35 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-
+        Pause();
+        StartCoroutine(LoadLevelAsync(0));
     }
 
     public void NextLevel()
     {
+        if (currentLevel == levelList.Length - 1)
+        {
+            // Last level, win!
+            OnWin();
+            return;
+        }
 
+        Pause();
+        StartCoroutine(LoadLevelAsync((currentLevel + 1) % levelList.Length));
+    }
+
+    private IEnumerator LoadLevelAsync(int nextLevel)
+    {
+        var asUnload = SceneManager.UnloadSceneAsync(levelList[currentLevel]);
+        currentLevel = nextLevel;
+        var asLoad = SceneManager.LoadSceneAsync(levelList[currentLevel], LoadSceneMode.Additive);
+
+        while (!asUnload.isDone || !asLoad.isDone)
+        {
+            yield return null;
+        }
+
+        Reset();
     }
 
     public void PlayerTakeDamage()

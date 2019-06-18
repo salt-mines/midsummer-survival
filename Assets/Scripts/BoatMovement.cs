@@ -6,6 +6,8 @@ public class BoatMovement : MonoBehaviour
     public float boatSpeed = 6f;
     public float boatStrafeSpeed = 3f;
 
+    internal bool isPaused;
+
     private PlayerInput input;
 
     private float startingPos;
@@ -27,6 +29,8 @@ public class BoatMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isPaused) return;
+
         var newPos = transform.position;
         newPos.z += boatSpeed * Time.deltaTime;
 
