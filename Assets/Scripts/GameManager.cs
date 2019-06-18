@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         Pause();
+        playerCurrentLives = playerMaxLives;
         StartCoroutine(LoadLevelAsync(0));
     }
 

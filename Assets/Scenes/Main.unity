@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.14603122, g: 0.14326508, b: 0.090653, a: 1}
+  m_IndirectSpecularColor: {r: 0.14603157, g: 0.1432653, b: 0.09065307, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1151,6 +1151,7 @@ MonoBehaviour:
   playerSpawnWaitTime: 2
   levelList:
   - Level 1
+  - Level 2
   playerHitImmunityTime: 1
   playerMaxLives: 3
   lifePanel: {fileID: 8430411882701847576}
