@@ -1,9 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // Level system
+    public string[] levelList;
+
+    private int currentLevel = 0;
+
+    // Life system
     public float playerHitImmunityTime = 1f;
     public int playerMaxLives = 3;
 
@@ -23,6 +28,14 @@ public class GameManager : MonoBehaviour
         playerCurrentLives = playerMaxLives;
 
         lifePanel.SetMaxLives(playerMaxLives);
+
+        if (levelList.Length == 0)
+        {
+            Utils.Error("GameManager: Level List must have at least one level");
+            return;
+        }
+
+        SceneManager.LoadScene(levelList[currentLevel], LoadSceneMode.Additive);
     }
 
     // Update is called once per frame
