@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.14603157, g: 0.1432653, b: 0.09065307, a: 1}
+  m_IndirectSpecularColor: {r: 0.14603122, g: 0.14326508, b: 0.090653, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -164,12 +164,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &268183382 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7256087443895815162, guid: 9032921fc61da7b4a8c929e0ea5f9a51,
-    type: 3}
-  m_PrefabInstance: {fileID: 7256087443817691197}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &318094921
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +373,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: -2.0630835e+9, z: 5.47e-43, w: -2.0630835e+9}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1147,8 +1141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f63c92d38236a4f9e6b3f5c3380b8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 268183382}
-  playerSpawnWaitTime: 2
+  player: {fileID: 0}
+  playerSpawnWaitTime: 3
   levelList:
   - Level 1
   - Level 2
@@ -1158,7 +1152,8 @@ MonoBehaviour:
   canvas: {fileID: 1140045908}
   pauseMenuPrefab: {fileID: 3326392299879378982, guid: bd7369a639cc4794b9b467061c3e9a5e,
     type: 3}
-  nextLevelMenuPrefab: {fileID: 0}
+  nextLevelMenuPrefab: {fileID: 1647228425029077321, guid: ff23d52411206964f90747986a227eba,
+    type: 3}
   gameOverMenuPrefab: {fileID: 2361623220494780330, guid: c3a4028afbe5cc5469019a792f51a8c9,
     type: 3}
 --- !u!1 &1491640408
