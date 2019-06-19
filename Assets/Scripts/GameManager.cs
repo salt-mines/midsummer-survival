@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         playerTimeWaited = 0;
         playerWaiting = true;
         player.GetComponent<BoatMovement>().isPaused = true;
-        var drunk = currentLevel * 1 / (levelList.Length - 1);
+        var drunk = currentLevel * 1f / (levelList.Length - 1);
         player.GetComponent<BoatMovement>().drunkLevel = drunk;
 
         if (drunkText)
