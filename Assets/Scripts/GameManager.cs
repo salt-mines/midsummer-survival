@@ -1,7 +1,9 @@
 ﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,12 +30,16 @@ public class GameManager : MonoBehaviour
 
     // UI
     public Canvas canvas;
+    public EventSystem eventSystem;
 
     public MenuScript pauseMenuPrefab;
     public MenuScript nextLevelMenuPrefab;
     public GameOverMenu gameOverMenuPrefab;
 
-    public TextMeshProUGUI drunkText;
+    public RectTransform drunkIndicator;
+    private float indicatorOrigHeight;
+
+    public TextMeshProUGUI levelText;
 
     private bool paused;
 
@@ -51,6 +57,11 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(levelList[currentLevel], LoadSceneMode.Additive);
+
+        if (drunkIndicator)
+        {
+            indicatorOrigHeight = drunkIndicator.sizeDelta.y;
+        }
 
         Reset();
     }
@@ -80,14 +91,16 @@ public class GameManager : MonoBehaviour
         player.GetComponent<BoatMovement>().drunkLevel = drunk;
         player.GetComponent<BoatMovement>().Reset();
 
-        if (drunkText)
+        if (drunkIndicator)
         {
-            drunkText.text = $"{drunk:P0}";
+            var size = drunkIndicator.sizeDelta;
+            size.y = indicatorOrigHeight * (1 - drunk);
+            drunkIndicator.sizeDelta = size;
+        }
 
-            if (drunk == 1)
-            {
-                drunkText.text = "Yes";
-            }
+        if (levelText)
+        {
+            levelText.text = $"Level {currentLevel + 1}/{levelCount}";
         }
 
         Resume();
@@ -156,12 +169,11 @@ public class GameManager : MonoBehaviour
     {
         if (paused) { return; }
 
+        paused = true;
         Pause();
 
-        Instantiate(pauseMenuPrefab, canvas.transform);
-
-        paused = true;
-
+        var menu = Instantiate(pauseMenuPrefab, canvas.transform);
+        eventSystem.SetSelectedGameObject(menu.GetComponentInChildren<Button>().gameObject);
     }
 
     public void OnNextLevelMenu()
@@ -175,7 +187,8 @@ public class GameManager : MonoBehaviour
 
         Pause();
 
-        Instantiate(nextLevelMenuPrefab, canvas.transform);
+        var menu = Instantiate(nextLevelMenuPrefab, canvas.transform);
+        eventSystem.SetSelectedGameObject(menu.GetComponentInChildren<Button>().gameObject);
     }
 
     void OnDeath()
@@ -183,9 +196,9 @@ public class GameManager : MonoBehaviour
         if (!gameCanEnd) return;
 
         Pause();
-        Debug.Log("Player died!");
 
         GameOverMenu gameOver = Instantiate(gameOverMenuPrefab, canvas.transform);
+        eventSystem.SetSelectedGameObject(gameOver.GetComponentInChildren<Button>().gameObject);
 
         gameOver.Lost();
     }
@@ -193,7 +206,6 @@ public class GameManager : MonoBehaviour
     public void OnWin()
     {
         Pause();
-        Debug.Log("Player won!");
 
         if (!gameCanEnd)
         {
@@ -201,6 +213,7 @@ public class GameManager : MonoBehaviour
         }
 
         GameOverMenu gameOver = Instantiate(gameOverMenuPrefab, canvas.transform);
+        eventSystem.SetSelectedGameObject(gameOver.GetComponentInChildren<Button>().gameObject);
 
         gameOver.Won();
     }
