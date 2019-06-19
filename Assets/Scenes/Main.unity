@@ -16025,6 +16025,46 @@ PrefabInstance:
       propertyPath: drunkEffectStrength
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4579659470735765730, guid: 9032921fc61da7b4a8c929e0ea5f9a51,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.50331014
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579659470735765730, guid: 9032921fc61da7b4a8c929e0ea5f9a51,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.03515385
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579659470735765730, guid: 9032921fc61da7b4a8c929e0ea5f9a51,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7062324
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579659470735765730, guid: 9032921fc61da7b4a8c929e0ea5f9a51,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.03515385
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579659470735765730, guid: 9032921fc61da7b4a8c929e0ea5f9a51,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7062324
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579659470735765730, guid: 9032921fc61da7b4a8c929e0ea5f9a51,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.04756546
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579659470735765730, guid: 9032921fc61da7b4a8c929e0ea5f9a51,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579659470735765730, guid: 9032921fc61da7b4a8c929e0ea5f9a51,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -5.6990004
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9032921fc61da7b4a8c929e0ea5f9a51, type: 3}
 --- !u!114 &8430411882701847576

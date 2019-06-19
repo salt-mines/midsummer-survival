@@ -21,9 +21,12 @@ public class BoatMovement : MonoBehaviour
     private float leftBound;
     private float rightBound;
 
+    private Animator animator;
+
     void Awake()
     {
         input = GetComponent<PlayerInput>();
+        animator = GetComponentInChildren<Animator>();
 
         startingPos = transform.position;
 
@@ -58,6 +61,9 @@ public class BoatMovement : MonoBehaviour
         NewDrunkTarget();
 
         isPaused = true;
+
+        if (animator)
+            animator.SetFloat("Speed", 0);
     }
 
     void NewDrunkTarget()
@@ -74,6 +80,9 @@ public class BoatMovement : MonoBehaviour
         var newPos = transform.position;
         newPos.z += boatSpeed * Time.deltaTime;
 
+        if (animator)
+            animator.SetFloat("Speed", boatSpeed);
+
         if (drunkLevel > 0 && Mathf.Abs(drunkTarget - drunkMovement) < 0.2f)
         {
             NewDrunkTarget();
@@ -87,8 +96,7 @@ public class BoatMovement : MonoBehaviour
         newPos.x += currentMovement * boatStrafeSpeed * Time.deltaTime;
 
         newPos.x = Mathf.Clamp(newPos.x, leftBound, rightBound);
-
-        rotation.x = -boatSpeed;
+        
         rotation.y = currentMovement * 45;
 
         transform.position = newPos;
