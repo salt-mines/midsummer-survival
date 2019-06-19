@@ -1386,6 +1386,8 @@ MonoBehaviour:
   levelList:
   - Level 1
   - Level 2
+  - Level 3
+  - Level 4
   gameCanEnd: 1
   playerHitImmunityTime: 1
   playerMaxLives: 3
@@ -2232,6 +2234,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7b15c6ac995cde145914dc56a4330be6, type: 2}
+    - target: {fileID: 5499620183621080883, guid: 9032921fc61da7b4a8c929e0ea5f9a51,
+        type: 3}
+      propertyPath: boatSpeed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9032921fc61da7b4a8c929e0ea5f9a51, type: 3}
 --- !u!114 &8430411882701847576
