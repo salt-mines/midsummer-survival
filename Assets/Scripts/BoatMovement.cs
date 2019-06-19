@@ -21,7 +21,7 @@ public class BoatMovement : MonoBehaviour
     private float leftBound;
     private float rightBound;
 
-    void Start()
+    void Awake()
     {
         input = GetComponent<PlayerInput>();
 
