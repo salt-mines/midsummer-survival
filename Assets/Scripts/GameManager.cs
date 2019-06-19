@@ -84,6 +84,11 @@ public class GameManager : MonoBehaviour
         if (drunkText)
         {
             drunkText.text = $"{drunk:P0}";
+
+            if(drunk == 1)
+            {
+                drunkText.text = "Yes";
+            }
         }
 
         Resume();
@@ -104,6 +109,7 @@ public class GameManager : MonoBehaviour
     {
         Pause();
         playerCurrentLives = playerMaxLives;
+        lifePanel.SetCurrentLives(playerCurrentLives);
         StartCoroutine(LoadLevelAsync(0));
     }
 
