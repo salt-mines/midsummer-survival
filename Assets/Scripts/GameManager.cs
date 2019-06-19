@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public int playerMaxLives = 3;
     public LifePanel lifePanel;
 
+    private float lastHitTime = float.NegativeInfinity;
     private int playerCurrentLives;
 
     // UI
@@ -75,7 +76,8 @@ public class GameManager : MonoBehaviour
         playerTimeWaited = 0;
         playerWaiting = true;
         player.GetComponent<BoatMovement>().Reset();
-        var drunk = currentLevel * 1f / (levelList.Length - 1);
+        var levelCount = levelList.Length;
+        var drunk = levelCount > 1 ? currentLevel * 1f / (levelList.Length - 1) : 1;
         player.GetComponent<BoatMovement>().drunkLevel = drunk;
 
         if (drunkText)
@@ -106,7 +108,7 @@ public class GameManager : MonoBehaviour
     {
         Pause();
         playerCurrentLives = playerMaxLives;
-        lifePanel.SetCurrentLives(playerCurrentLives);
+        lifePanel.SetMaxLives(playerMaxLives);
         StartCoroutine(LoadLevelAsync(0));
     }
 
@@ -132,8 +134,15 @@ public class GameManager : MonoBehaviour
 
     public void PlayerTakeDamage()
     {
+        if (lastHitTime + playerHitImmunityTime > Time.time)
+        {
+            return;
+        }
+
         Debug.Log("Player took damage!");
         playerCurrentLives--;
+
+        lastHitTime = Time.time;
 
         lifePanel.SetCurrentLives(playerCurrentLives);
 

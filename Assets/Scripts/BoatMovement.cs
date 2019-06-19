@@ -7,6 +7,7 @@ public class BoatMovement : MonoBehaviour
     public float boatStrafeSpeed = 3f;
     public float boatTurnSpeed = 0.2f;
 
+    [Range(0, 2)]
     public float drunkEffectStrength = 1f;
 
     [Range(0, 1)]
@@ -31,12 +32,17 @@ public class BoatMovement : MonoBehaviour
 
         leftBound = river.bounds.min.x + boatHalfWidth;
         rightBound = river.bounds.max.x - boatHalfWidth;
+
+        Reset();
     }
 
     private float currentMovement;
     private float currentDampingVelocity;
 
     private float drunkMovement;
+    private float drunkTarget;
+    private float drunkDampingSpeed;
+    private float currentDrunkDamping;
 
     private Vector3 rotation;
 
@@ -47,9 +53,18 @@ public class BoatMovement : MonoBehaviour
         model.transform.rotation = Quaternion.Euler(rotation);
 
         transform.position = startingPos;
+        currentMovement = 0;
         drunkMovement = 0;
+        NewDrunkTarget();
 
         isPaused = true;
+    }
+
+    void NewDrunkTarget()
+    {
+        currentDrunkDamping = 0;
+        drunkTarget = Random.Range(-2f, 2f) * drunkLevel * drunkEffectStrength;
+        drunkDampingSpeed = Random.Range(0.5f, 2f);
     }
 
     void FixedUpdate()
@@ -59,9 +74,14 @@ public class BoatMovement : MonoBehaviour
         var newPos = transform.position;
         newPos.z += boatSpeed * Time.deltaTime;
 
-        drunkMovement += Random.Range(-0.05f, 0.05f);
+        if (Mathf.Abs(drunkTarget - drunkMovement) < 0.2f)
+        {
+            NewDrunkTarget();
+        }
 
-        var target = input.Horizontal + drunkMovement * drunkLevel;
+        drunkMovement = Mathf.SmoothDamp(drunkMovement, drunkTarget, ref currentDrunkDamping, drunkDampingSpeed);
+
+        var target = input.Horizontal + drunkMovement;
 
         currentMovement = Mathf.SmoothDamp(currentMovement, target, ref currentDampingVelocity, boatTurnSpeed + drunkLevel);
         newPos.x += currentMovement * boatStrafeSpeed * Time.deltaTime;
