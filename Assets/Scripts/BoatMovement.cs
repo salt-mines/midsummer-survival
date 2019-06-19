@@ -16,7 +16,7 @@ public class BoatMovement : MonoBehaviour
 
     private PlayerInput input;
 
-    private float startingPos;
+    private Vector3 startingPos;
     private float leftBound;
     private float rightBound;
 
@@ -24,7 +24,7 @@ public class BoatMovement : MonoBehaviour
     {
         input = GetComponent<PlayerInput>();
 
-        startingPos = transform.position.z;
+        startingPos = transform.position;
 
         var river = GameObject.FindGameObjectWithTag("River").GetComponent<Renderer>();
         var boatHalfWidth = transform.localScale.x / 2;
@@ -39,6 +39,18 @@ public class BoatMovement : MonoBehaviour
     private float drunkMovement;
 
     private Vector3 rotation;
+
+    public void Reset()
+    {
+        rotation.Set(0, 0, 0);
+        var model = transform.GetChild(0);
+        model.transform.rotation = Quaternion.Euler(rotation);
+
+        transform.position = startingPos;
+        drunkMovement = 0;
+
+        isPaused = true;
+    }
 
     void FixedUpdate()
     {
@@ -56,8 +68,8 @@ public class BoatMovement : MonoBehaviour
 
         newPos.x = Mathf.Clamp(newPos.x, leftBound, rightBound);
 
-        rotation.y = 90 + currentMovement * 45;
-        rotation.z = -boatSpeed;
+        rotation.x = -boatSpeed;
+        rotation.y = currentMovement * 45;
 
         transform.position = newPos;
 

@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     // Player stuff
     public GameObject player;
-    private Vector3 playerPos;
 
     public float playerSpawnWaitTime = 3;
     private float playerTimeWaited;
@@ -40,7 +39,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerPos = player.transform.position;
         playerCurrentLives = playerMaxLives;
 
         lifePanel.SetMaxLives(playerMaxLives);
@@ -74,10 +72,9 @@ public class GameManager : MonoBehaviour
 
     private void Reset()
     {
-        player.transform.position = playerPos;
         playerTimeWaited = 0;
         playerWaiting = true;
-        player.GetComponent<BoatMovement>().isPaused = true;
+        player.GetComponent<BoatMovement>().Reset();
         var drunk = currentLevel * 1 / (levelList.Length - 1);
         player.GetComponent<BoatMovement>().drunkLevel = drunk;
 
@@ -85,7 +82,7 @@ public class GameManager : MonoBehaviour
         {
             drunkText.text = $"{drunk:P0}";
 
-            if(drunk == 1)
+            if (drunk == 1)
             {
                 drunkText.text = "Yes";
             }
