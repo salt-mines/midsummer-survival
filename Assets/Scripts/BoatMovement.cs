@@ -74,7 +74,7 @@ public class BoatMovement : MonoBehaviour
         var newPos = transform.position;
         newPos.z += boatSpeed * Time.deltaTime;
 
-        if (Mathf.Abs(drunkTarget - drunkMovement) < 0.2f)
+        if (drunkLevel > 0 && Mathf.Abs(drunkTarget - drunkMovement) < 0.2f)
         {
             NewDrunkTarget();
         }
