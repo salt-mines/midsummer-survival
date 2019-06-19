@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.14603157, g: 0.1432653, b: 0.09065307, a: 1}
+  m_IndirectSpecularColor: {r: 0.14603122, g: 0.14326508, b: 0.090653, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2238,6 +2238,11 @@ PrefabInstance:
         type: 3}
       propertyPath: boatSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499620183621080883, guid: 9032921fc61da7b4a8c929e0ea5f9a51,
+        type: 3}
+      propertyPath: drunkEffectStrength
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9032921fc61da7b4a8c929e0ea5f9a51, type: 3}
